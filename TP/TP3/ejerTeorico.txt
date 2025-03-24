@@ -1,0 +1,51 @@
+1) ¿Qué es npm y cuál es su función en un proyecto de Node.js?
+npm (Node Package Manager) es el gestor de paquetes predeterminado 
+para Node.js. Su función principal es facilitar la instalación, 
+gestión y actualización de paquetes (módulos) de JavaScript, permitiendo 
+a los desarrolladores integrar librerías de terceros en sus proyectos.
+
+2) Estructura básica del archivo package.json y tres campos importantes
+El archivo package.json es un archivo de configuración que describe un 
+proyecto de Node.js y sus dependencias. Su estructura básica incluye:
+{
+  "name": "mi-proyecto",
+  "version": "1.0.0",
+  "description": "Descripción breve del proyecto",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
+Tres campos importantes:
+dependencies: Lista de paquetes necesarios para ejecutar el proyecto.
+devDependencies: Lista de paquetes solo necesarios en el entorno de desarrollo.
+scripts: Comandos personalizados para ejecutar acciones en el proyecto.
+
+3) Diferencia entre dependencias normales y dependencias de desarrollo en npm
+Dependencias normales (dependencies): Son necesarias para ejecutar la 
+aplicación en producción. Se instalan con npm install paquete.
+Dependencias de desarrollo (devDependencies): Solo son necesarias durante el 
+desarrollo, como herramientas de prueba o compilación. Se instalan con npm 
+install paquete --save-dev.
+
+4) Comando para actualizar un paquete instalado en el proyecto
+Para actualizar un paquete específico:
+npm update nombre-del-paquete
+Para actualizar todos los paquetes:
+npm update
+
+5) Uso del comando npm link
+npm link se utiliza para crear enlaces simbólicos entre paquetes de 
+Node.js locales. Permite desarrollar un paquete de manera local y probarlo 
+en otro proyecto sin necesidad de publicarlo en el registro de npm.
+
+6) Ver el módulo de inicio de un proyecto
+Para ver el módulo de inicio definido en package.json, revisa el campo 
+"main", que indica el archivo principal:
+"main": "index.js"
