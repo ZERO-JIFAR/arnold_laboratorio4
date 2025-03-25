@@ -11,7 +11,6 @@ import {pedirEdad} from './edad.js'
 
 // Ejercicio 4
 import { pedirDatos } from "./guardarDatos.js"; 
-import { console } from "inspector";
 
 console.log("Las respuestas a las preguntas estan en tu corazon y en el archivo llamado: ejerTeorico.txt")
 
@@ -43,9 +42,10 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('¿Cuál es tu nombre? ', (nombre) => {
+rl.question('¿Cuál es tu nombre? ', async (nombre) => {
     console.log(`Hola, ${nombre}!`);
-    pedirEdad(rl, nombre);
+    const edad = await pedirEdad(rl, nombre);
+    pedirDatos(rl, nombre, edad);
 });
 
-pedirDatos();
+
