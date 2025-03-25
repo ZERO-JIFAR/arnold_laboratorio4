@@ -1,0 +1,3 @@
+Nombre: lala
+Edad: 2
+Correo: lala@lala

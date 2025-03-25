@@ -1,0 +1,43 @@
+1) ¿Qué ventajas tiene usar dotenv para manejar configuraciones sensibles 
+en vez de tenerlas directamente en el código?
+
+En lugar de escribir configuraciones directamente en el código, dotenv 
+permite cargarlas desde un archivo .env. Sus principales ventajas son:
+. Seguridad: Evita exponer credenciales (API keys, contraseñas) en el 
+código fuente, reduciendo riesgos de filtraciones.
+. Flexibilidad: Permite cambiar configuraciones sin modificar el código 
+(útil para diferentes entornos: desarrollo, prueba y producción).
+. Portabilidad: Facilita compartir el proyecto sin incluir datos sensibles 
+en el repositorio (.env puede agregarse a .gitignore).
+. Mantenimiento: Mantiene el código limpio y organizado, separando la 
+lógica de la configuración.
+
+
+2) ¿Por qué es importante utilizar Nodemon durante el desarrollo en 
+proyectos de Node.js?
+
+Durante el desarrollo en Node.js, Nodemon mejora la productividad porque:
+. Recarga automática: Reinicia el servidor automáticamente cuando detecta 
+cambios en los archivos, evitando hacerlo manualmente.
+. Ahorro de tiempo: Permite probar cambios de inmediato sin tener que 
+detener y volver a ejecutar node index.js.
+. Flujo de trabajo eficiente: Facilita el debugging y desarrollo ágil en 
+aplicaciones que requieren cambios frecuentes.
+
+3) ¿Qué diferencias encuentras entre el uso de require y import/export? 
+
+Característica	    require (CommonJS)	                    import/export (ES6 Modules)
+Sintaxis	        const module = require('module');	    import module from 'module';
+Exportación	        module.exports = { ... }	            export default ... / export const ...
+Carga	            Síncrona (bloquea ejecución)	        Asíncrona (mejor rendimiento)
+Soporte en Node.js	Nativo en versiones anteriores a ES6	Requiere "type": "module" en package.json o .mjs
+Uso recomendado	    Proyectos legacy                        Proyectos modernos con JavaScript estándar
+                    Compatibilidad con CommonJS	
+
+
+4) ¿Por qué es preferible utilizar la sintaxis ES6 en proyectos modernos?
+
+. Estándar de JavaScript: Es la sintaxis oficial en navegadores y frameworks modernos.
+. Mejor rendimiento: Permite optimización en bundlers y tree-shaking para reducir tamaño de archivos.
+. Compatibilidad con TypeScript: Se integra mejor con herramientas como Babel y Webpack.
+. Código más limpio y estructurado: Facilita la organización modular del proyecto.
