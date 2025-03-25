@@ -1,0 +1,84 @@
+●	¿Qué es GitHub? 
+GitHub es una plataforma de desarrollo colaborativo basada en Git. Permite 
+alojar repositorios de código, colaborar con otros desarrolladores y gestionar 
+proyectos mediante control de versiones.
+
+●	¿Cómo crear un repositorio en GitHub? 
+1) Inicia sesión en GitHub.
+2) Haz clic en el ícono de + en la esquina superior derecha y selecciona "New repository".
+3) Ingresa un nombre para el repositorio y elige si será público o privado.
+4) Opcionalmente, agrega un README, .gitignore o licencia.
+5) Haz clic en "Create repository".
+
+●	¿Cómo crear una rama en Git? 
+git branch nombre-de-la-rama
+
+●	¿Cómo cambiar a una rama en Git?
+git switch nombre-de-la-rama
+o
+git checkout nombre-de-la-rama
+
+●	¿Cómo fusionar ramas en Git?
+1) Cambia a la rama en la que quieres fusionar otra:
+git checkout main
+2) Fusiona la otra rama con:
+git merge nombre-de-la-rama
+
+●	¿Cómo crear un commit en Git?
+git add .
+git commit -m "Mensaje descriptivo del commit"
+
+●	¿Cómo enviar un commit a GitHub? 
+git push origin nombre-de-la-rama
+
+●	¿Qué es un repositorio remoto? 
+Es una copia del repositorio alojada en una plataforma en línea 
+como GitHub, GitLab o Bitbucket.
+
+●	¿Cómo agregar un repositorio remoto a Git? 
+git remote add origin URL_DEL_REPOSITORIO
+
+●	¿Cómo empujar cambios a un repositorio remoto? 
+git push origin nombre-de-la-rama
+
+●	¿Cómo tirar de cambios de un repositorio remoto? 
+git pull origin nombre-de-la-rama
+
+●	¿Qué es un historial de Git? 
+Es el registro de todos los commits hechos en un repositorio.
+
+●	¿Cómo ver el historial de Git? 
+git log
+o algo mas completo
+git log --oneline
+
+●	¿Cómo buscar en el historial de Git? 
+git log --grep="palabra clave"
+
+●	¿Cómo borrar el historial de Git? 
+git checkout --orphan nueva-rama
+git add .
+git commit -m "Nuevo inicio"
+git branch -D main
+git branch -m main
+git push -f origin main
+
+●	¿Qué es un repositorio privado en GitHub? 
+Es un repositorio al que solo pueden acceder los colaboradores autorizados.
+
+●	¿Cómo crear un repositorio privado en GitHub? 
+Sigue los mismos pasos para crear un repositorio, pero selecciona la opción "Private".
+
+●	¿Cómo invitar a alguien a un repositorio privado en GitHub? 
+1) Ve al repositorio en GitHub.
+2) Haz clic en "Settings" → "Manage access".
+3) Agrega el usuario con "Invite a collaborator".
+
+●	¿Qué es un repositorio público en GitHub? 
+Es un repositorio accesible para cualquier persona en Internet.
+
+●	¿Cómo crear un repositorio público en GitHub? 
+Al crear un repositorio, selecciona "Public" en la configuración de visibilidad.
+
+●	¿Cómo compartir un repositorio público en GitHub? 
+Compartiendo la URL del repositorio
