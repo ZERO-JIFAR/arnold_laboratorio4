@@ -1,78 +1,66 @@
-const fs = require('fs').promises;
-const readline = require('readline');
-const yargs = require('yargs');
-
-const argv = yargs.option('file', {
-    alias: 'f',
-    type: 'string',
-    default: 'productos.json',
-    describe: 'Nombre del archivo JSON donde se guardaran los productos'
-}).argv;
+const fs = require("fs/promises");
+const readline = require("readline");
+const yargs = require("yargs");
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-const preguntar = (pregunta) => {
-    return new Promise((resolve) => {
-        rl.question(pregunta, (respuesta) => {
-            resolve(respuesta);
-        });
-    });
-};
+const argv = yargs
+    .option("file", {
+        alias: "f",
+        type: "string",
+        description: "Nombre del archivo JSON",
+        default: "productos.json"
+    })
+    .help()
+    .argv;
 
-const obtenerDatos = async () => {
+async function solicitarDato(pregunta) {
+    return new Promise((resolve) => {
+        rl.question(pregunta, (respuesta) => resolve(respuesta));
+    });
+}
+
+async function main() {
     try {
-        const nombre = await preguntar('Producto: ');
-        const precio = parseFloat(await preguntar('Precio: '));
-        const cantidad = parseInt(await preguntar('Cantidad: '), 10);
+        const nombre = await solicitarDato("Ingrese el nombre del producto: ");
+        const precio = parseFloat(await solicitarDato("Ingrese el precio del producto: "));
+        const cantidad = parseInt(await solicitarDato("Ingrese la cantidad del producto: "), 10);
+        rl.close();
 
         if (isNaN(precio) || isNaN(cantidad)) {
-            console.error('Error: Precio y cantidad deben ser valores numericos');
-            rl.close();
+            console.error("El precio y la cantidad deben ser valores numericos");
             return;
         }
 
-        const nuevoProducto = { nombre, precio, cantidad };
-        await guardarProducto(nuevoProducto);
-    } catch (error) {
-        console.error('Error obteniendo datos:', error);
-    } finally {
-        rl.close();
-    }
-};
+        const producto = { nombre, precio, cantidad };
+        const fileName = argv.file;
 
-const guardarProducto = async (producto) => {
-    try {
         let productos = [];
         try {
-            const data = await fs.readFile(argv.file, 'utf8');
+            const data = await fs.readFile(fileName, "utf-8");
             productos = JSON.parse(data);
+            if (!Array.isArray(productos)) {
+                throw new Error("El archivo JSON no contiene un array valido.");
+            }
         } catch (error) {
-            if (error.code !== 'ENOENT') {
-                console.error('Error leyendo el archivo:', error);
+            if (error.code !== "ENOENT") {
+                console.error("Error al leer el archivo JSON:", error);
                 return;
             }
         }
 
         productos.push(producto);
-        await fs.writeFile(argv.file, JSON.stringify(productos, null, 2), 'utf8');
-        console.log('Producto guardado');
+        await fs.writeFile(fileName, JSON.stringify(productos, null, 2));
+        console.log("Producto guardado exitosamente.");
 
-        await mostrarArchivo();
+        const contenidoFinal = await fs.readFile(fileName, "utf-8");
+        console.log("Contenido del archivo:", contenidoFinal);
     } catch (error) {
-        console.error('Error guardando el producto:', error);
+        console.error("Ocurrio un error:", error);
     }
-};
+}
 
-const mostrarArchivo = async () => {
-    try {
-        const data = await fs.readFile(argv.file, 'utf8');
-        console.log('Contenido del archivo:', JSON.parse(data));
-    } catch (error) {
-        console.error('Error leyendo el archivo:', error);
-    }
-};
-
-obtenerDatos();
+main();

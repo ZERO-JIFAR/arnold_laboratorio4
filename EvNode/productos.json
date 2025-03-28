@@ -8,5 +8,10 @@
     "nombre": "lala2",
     "precio": 25,
     "cantidad": 6
+  },
+  {
+    "nombre": "lala3.0",
+    "precio": 258,
+    "cantidad": 4
   }
 ]
