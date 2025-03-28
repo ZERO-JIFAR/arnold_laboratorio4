@@ -1,0 +1,12 @@
+[
+  {
+    "nombre": "lala con dulce de leche",
+    "precio": 5,
+    "cantidad": 2
+  },
+  {
+    "nombre": "lala2",
+    "precio": 25,
+    "cantidad": 6
+  }
+]
