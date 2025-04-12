@@ -1,0 +1,83 @@
+1. ¿Qué es MongoDB? ¿En qué se diferencia de una base de datos relacional como MySQL o PostgreSQL?
+
+MongoDB es una base de datos NoSQL orientada a documentos. Almacena datos en formato JSON (o BSON, 
+que es similar a JSON pero binario).
+Diferencias con bases de datos relacionales (como MySQL o PostgreSQL):
+
+	MongoDB (NoSQL)					MySQL / PostgreSQL (Relacional)
+Usa colecciones y documentos			Usa tablas y filas
+No necesita un esquema fijo			Requiere un esquema estructurado
+Ideal para datos no 				Ideal para datos muy estructurados
+estructurados o semi-estructurados	
+Escala horizontal (sharding)			Escala vertical principalmente
+
+
+2. ¿Qué es una colección en MongoDB? ¿Y qué es un documento? Dibuja un ejemplo básico.
+
+Una colección es el equivalente a una tabla en una base de datos relacional.
+Un documento es el equivalente a una fila, pero tiene formato JSON (clave-valor)
+Ejemplo:
+// Colección: usuarios
+{
+  "_id": "1",
+  "nombre": "Juan",
+  "edad": 25,
+  "email": "juan@email.com"
+}
+Ese objeto JSON es un documento, y si agrupás varios, formás la colección usuarios.
+
+
+3. ¿Qué es Mongoose? ¿Para qué se utiliza en una app de Node.js?
+
+Mongoose es una librería de Node.js que permite interactuar con MongoDB de forma más 
+organizada y estructurada.
+Sirve para:
+Define esquemas para los documentos.
+Crea modelos para manipular los datos fácilmente.
+Valida datos automáticamente.
+Hace que trabajar con MongoDB sea más parecido a trabajar con una base de datos relacional.
+
+
+4. ¿Qué es un esquema en Mongoose? ¿Y qué es un modelo? ¿Cuál es la relación entre ambos?
+
+Un esquema (Schema) define la estructura de los documentos en una colección (como un 
+plano del documento).
+Un modelo (Model) se crea a partir del esquema y se usa para interactuar con la base de 
+datos (crear, leer, actualizar, eliminar).
+Relación:
+const mongoose = require('mongoose');
+// usuarioSchema: define cómo debe ser un documento.
+const usuarioSchema = new mongoose.Schema({
+  nombre: String,
+  edad: Number,
+  email: String
+});
+// Usuario: modelo que usás en tu código para trabajar con la colección usuarios.
+const Usuario = mongoose.model('Usuario', usuarioSchema);
+
+
+5. ¿Qué métodos de Mongoose se pueden usar para:
+
+. Insertar un nuevo documento:
+await Usuario.create({ nombre: 'Ana', edad: 30, email: 'ana@email.com' });
+
+. Buscar documentos:
+await Usuario.find(); // todos
+await Usuario.findOne({ nombre: 'Ana' }); // uno solo
+
+. Actualizar un documento:
+await Usuario.updateOne({ nombre: 'Ana' }, { edad: 31 });
+await Usuario.findByIdAndUpdate(id, { edad: 32 });
+
+. Eliminar un documento:
+await Usuario.deleteOne({ nombre: 'Ana' });
+await Usuario.findByIdAndDelete(id);
+
+
+
+
+
+
+
+
+
