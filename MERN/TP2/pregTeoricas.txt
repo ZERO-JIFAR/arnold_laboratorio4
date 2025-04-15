@@ -45,6 +45,7 @@ plano del documento).
 Un modelo (Model) se crea a partir del esquema y se usa para interactuar con la base de 
 datos (crear, leer, actualizar, eliminar).
 Relación:
+El modelo se crea en base al esquema que se crea
 const mongoose = require('mongoose');
 // usuarioSchema: define cómo debe ser un documento.
 const usuarioSchema = new mongoose.Schema({
@@ -58,22 +59,21 @@ const Usuario = mongoose.model('Usuario', usuarioSchema);
 
 5. ¿Qué métodos de Mongoose se pueden usar para:
 
-. Insertar un nuevo documento:
-await Usuario.create({ nombre: 'Ana', edad: 30, email: 'ana@email.com' });
-
-. Buscar documentos:
-await Usuario.find(); // todos
-await Usuario.findOne({ nombre: 'Ana' }); // uno solo
-
-. Actualizar un documento:
-await Usuario.updateOne({ nombre: 'Ana' }, { edad: 31 });
-await Usuario.findByIdAndUpdate(id, { edad: 32 });
-
-. Eliminar un documento:
-await Usuario.deleteOne({ nombre: 'Ana' });
-await Usuario.findByIdAndDelete(id);
-
-
+Insertar un nuevo documento: 
+    • Model.create(doc)
+    • Crear una instancia con new Model(doc) y luego llamar a .save()
+Buscar documentos:
+    • Model.find(criterio) para múltiples documentos
+    • Model.findOne(criterio) para un solo documento
+    • Model.findById(id) para buscar por identificador único
+Actualizar un documento:
+    • Model.updateOne(criterio, actualización)
+    • Model.findByIdAndUpdate(id, actualización)
+    • Model.updateMany(criterio, actualización) para actualizaciones en masa
+Eliminar un documento:
+    • Model.deleteOne(criterio)
+    • Model.findByIdAndDelete(id)
+    • Model.deleteMany(criterio) para eliminar varios documentos a la vez
 
 
 
