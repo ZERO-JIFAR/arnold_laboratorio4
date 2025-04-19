@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const backlogController = require('../controllers/backlogController');
+const controller = require('../controllers/backlogController');
 
-// Endpoints de backlog
-router.get('/', backlogController.getBacklog);
-router.post('/', backlogController.createBacklog);
-router.put('/add-task/:taskId', backlogController.addTaskToBacklog);
+router.get('/', controller.getBacklog);
+router.post('/', controller.createBacklog);
+router.put('/add-task/:taskId', controller.addTaskToBacklog);
 
 module.exports = router;

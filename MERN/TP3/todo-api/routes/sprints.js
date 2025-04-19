@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const sprintController = require('../controllers/sprintController');
+const controller = require('../controllers/sprintController');
 
-// Endpoints de sprints
-router.get('/', sprintController.getAllSprints);
-router.get('/:id', sprintController.getSprintById);
-router.post('/', sprintController.createSprint);
-router.put('/:id', sprintController.updateSprint);
-router.delete('/:id', sprintController.deleteSprint);
-router.put('/:id/add-task/:taskId', sprintController.addTaskToSprint);
+router.get('/', controller.getSprints);
+router.get('/:id', controller.getSprintById);
+router.post('/', controller.createSprint);
+router.put('/:id', controller.updateSprint);
+router.delete('/:id', controller.deleteSprint);
+router.put('/:id/add-task/:taskId', controller.addTaskToSprint);
 
 module.exports = router;

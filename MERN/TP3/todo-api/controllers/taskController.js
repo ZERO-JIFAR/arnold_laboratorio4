@@ -1,75 +1,55 @@
 const Task = require('../models/Task');
+const Sprint = require('../models/Sprint');
 
-// Obtener todas las tareas (con filtro opcional por estado y orden por fechaLimite)
-const getAllTasks = async (req, res) => {
+exports.getTasks = async (req, res) => {
     try {
-        const filtro = {};
-        if (req.query.estado) {
-        filtro.estado = req.query.estado;
-        }
-
-        const tareas = await Task.find(filtro).sort({ fechaLimite: 1 });
-        res.json(tareas);
+        const filter = req.query.estado ? { estado: req.query.estado } : {};
+        const tasks = await Task.find(filter).sort({ fechaLimite: 1 });
+        res.json(tasks);
     } catch (err) {
-        res.status(500).json({ error: 'Error al obtener las tareas' });
+        res.status(500).json({ error: err.message });
     }
 };
 
-// Obtener tarea por ID
-const getTaskById = async (req, res) => {
+exports.getTaskById = async (req, res) => {
     try {
-        const tarea = await Task.findById(req.params.id);
-        if (!tarea) return res.status(404).json({ error: 'Tarea no encontrada' });
-        res.json(tarea);
+        const task = await Task.findById(req.params.id);
+        if (!task) return res.status(404).json({ error: 'Tarea no encontrada' });
+        res.json(task);
     } catch (err) {
-        res.status(500).json({ error: 'Error al obtener la tarea' });
+        res.status(500).json({ error: err.message });
     }
 };
 
-// Crear tarea
-const createTask = async (req, res) => {
+exports.createTask = async (req, res) => {
     try {
-        const nuevaTarea = new Task(req.body);
-        await nuevaTarea.save();
-        res.status(201).json(nuevaTarea);
+        const task = new Task(req.body);
+        await task.save();
+        res.status(201).json(task);
     } catch (err) {
-        res.status(400).json({ error: 'Error al crear la tarea' });
+        res.status(400).json({ error: err.message });
     }
 };
 
-// Editar tarea
-const updateTask = async (req, res) => {
+exports.updateTask = async (req, res) => {
     try {
-        const tarea = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!tarea) return res.status(404).json({ error: 'Tarea no encontrada' });
-        res.json(tarea);
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!task) return res.status(404).json({ error: 'Tarea no encontrada' });
+        res.json(task);
     } catch (err) {
-        res.status(400).json({ error: 'Error al actualizar la tarea' });
+        res.status(400).json({ error: err.message });
     }
 };
 
-// Eliminar tarea
-const deleteTask = async (req, res) => {
+exports.deleteTask = async (req, res) => {
     try {
-        // Validación: ¿Está asignada a un sprint?
-        const Sprint = require('../models/Sprint');
-        const estaAsignada = await Sprint.findOne({ tareas: req.params.id });
-        if (estaAsignada) {
-        return res.status(400).json({ error: 'No se puede eliminar una tarea asignada a un sprint' });
-        }
+        const assigned = await Sprint.findOne({ tareas: req.params.id });
+        if (assigned) return res.status(400).json({ error: 'No se puede eliminar una tarea asignada a un sprint' });
 
-        const tarea = await Task.findByIdAndDelete(req.params.id);
-        if (!tarea) return res.status(404).json({ error: 'Tarea no encontrada' });
+        const deleted = await Task.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ error: 'Tarea no encontrada' });
         res.json({ mensaje: 'Tarea eliminada' });
     } catch (err) {
-        res.status(500).json({ error: 'Error al eliminar la tarea' });
+        res.status(500).json({ error: err.message });
     }
-};
-
-module.exports = {
-    getAllTasks,
-    getTaskById,
-    createTask,
-    updateTask,
-    deleteTask
 };
