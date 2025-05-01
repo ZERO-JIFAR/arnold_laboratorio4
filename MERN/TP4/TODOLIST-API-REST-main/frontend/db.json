@@ -1,0 +1,24 @@
+{
+  "backlog": {
+    "tareas": [
+      {
+        "id": "1745718528653",
+        "nombre": "Prueba nuevo db.json",
+        "descripcion": "PRueba",
+        "fechaInicio": "2025-04-01",
+        "fechaFin": "2025-04-30"
+      }
+    ]
+  },
+  "sprintList": {
+    "sprints": [
+      {
+        "id": "1745718381248",
+        "nombre": "Prueba nuevo db.json",
+        "inicio": "2025-04-01",
+        "fin": "2025-05-30",
+        "tareas": []
+      }
+    ]
+  }
+}

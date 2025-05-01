@@ -1,0 +1,17 @@
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URIDB=mongodb+srv://admin:admin@cluster0.crdrshu.mongodb.net/todolist?retryWrites=true&w=majority&appName=Cluster0
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://backend:3001
+    depends_on:
+      - backend
